@@ -5,6 +5,8 @@ import User from './components/User';
 import TaskList from './pages/TaskList';
 import WorkOrderList from './pages/WorkOrderList';
 import Navbar from './components/Navbar';
+import WorkOrderList from './pages/WorkOrderList';
+import UserProfile from './pages/UserProfile';
 
 const App = () => {
   return (
