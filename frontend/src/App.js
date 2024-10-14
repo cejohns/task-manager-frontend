@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './pages/login';
+import Dashboard from './pages/Dashboard';
+import TaskList from './pages/TaskList';
+import UserProfile from './pages/UserProfile';
+import WorkOrderList from './pages/WorkOrderList';
+import Navbar from './components/NavBar'; // Make sure this matches the correct file name and casing
 
-function App() {
+const App = () => {
+  // You can add an isAuthenticated state to control access to protected routes
+  const isAuthenticated = false; // Change this based on login status
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {isAuthenticated && <Navbar />}
+      <Routes>
+        {/* Login route */}
+        <Route path="/" element={<Login />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/dashboard"
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/tasks"
+          element={isAuthenticated ? <TaskList /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/workorders"
+          element={isAuthenticated ? <WorkOrderList /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/user/:userId"
+          element={isAuthenticated ? <UserProfile /> : <Navigate to="/" />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
