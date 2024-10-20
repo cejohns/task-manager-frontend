@@ -20,6 +20,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <h1>Task Manager Software  </h1>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
