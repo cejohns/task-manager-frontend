@@ -17,6 +17,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  password: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    enum: ['Administrator', 'QA', 'Special', 'Technician'],
+    required: true
+  },
   tasksLoggedInTo: [
     {
       type: mongoose.Schema.Types.ObjectId,
