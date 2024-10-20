@@ -1,14 +1,26 @@
 // controllers/userController.js
 const User = require('../models/User');
 
-exports.getUser = async (req, res) => {
+// Create a new user
+const createUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId).populate('tasksLoggedInTo tasksCompleted');
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(user);
+    const { username, firstName, lastName, password, role } = req.body;
+    const newUser = new User({ username, firstName, lastName, password, role });
+    await newUser.save();
+    res.status(201).json(newUser);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ error: 'Unable to create user' });
   }
 };
 
-// Define logIntoTask, completeTask, etc.
+// Get all users (Admin or other roles with access)
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Unable to fetch users' });
+  }
+};
+
+module.exports = { createUser, getUsers };
