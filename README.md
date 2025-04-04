@@ -1,4 +1,5 @@
 📝 Task Manager Frontend
+
 This project is the frontend of a Task Management application, designed to help users keep track of their tasks and notes. Users can create, view, update, and delete tasks and notes in an intuitive interface.
 
 Built with Create React App, this frontend is structured for scalability and ease of use.
